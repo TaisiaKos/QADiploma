@@ -1,4 +1,4 @@
-FROM node:hydrogen-slim
+FROM node:erbium-alpine3.12
 WORKDIR /opt/app
 COPY . .
 RUN npm install
