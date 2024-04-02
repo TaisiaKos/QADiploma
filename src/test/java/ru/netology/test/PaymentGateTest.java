@@ -1,5 +1,6 @@
 package ru.netology.test;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
@@ -8,10 +9,6 @@ import ru.netology.data.SQLHelper;
 import ru.netology.page.CreditGatePage;
 import ru.netology.page.PaymentGatePage;
 import ru.netology.page.DashboardPage;
-
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,11 +18,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-
-
-
-
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -59,12 +51,10 @@ public class PaymentGateTest {
         var year = DataHelper.getYear();
         var name = DataHelper.getName();
         var cardCVC = DataHelper.getCVCCode();
-
-        paymentGatePage.fillForm();
-        paymentGatePage.clickButton();
+        paymentGatePage.clickButton(DataHelper.getButton().getNext());
         paymentGatePage.seeSuccessful();
-        var actual = SQLHelper.getPaymentGate();
-        var expected = DataHelper.OperationStatus.class;
+        var actual = DataHelper.getToll();
+        var expected = DataHelper.getApprovedCard().getStatus();
         assertEquals(expected, actual);
     }
 

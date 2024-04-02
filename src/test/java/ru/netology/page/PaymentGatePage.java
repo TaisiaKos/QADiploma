@@ -9,13 +9,13 @@ import ru.netology.data.DataHelper;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selectors.byText;
 
 
 public class PaymentGatePage {
-    private final SelenideElement paymentGate = $(byText("Оплата по карте"));
+    private SelenideElement paymentGate = $(byText("Оплата по карте"));
     private final ElementsCollection fieldForm = $$(".input__control");
     private final SelenideElement fieldCardNumber = $(" .input__top");
     private final SelenideElement fieldMonth = $(" .input__top");
