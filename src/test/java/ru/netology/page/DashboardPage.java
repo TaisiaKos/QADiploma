@@ -20,15 +20,9 @@ public class DashboardPage {
     public void DashboardPageVisible() {
         heading.shouldHave(Condition.text("Путешествие дня")).shouldBe(visible);
     }
-
-    public PaymentGatePage selectCard() {
+    public PGate selectCard() {
         elementCard.click();
-        return new PaymentGatePage();
-    }
-
-    public CreditGatePage selectCredit() {
-        elementCredit.click();
-        return new CreditGatePage();
+        return new PGate();
     }
 }
 

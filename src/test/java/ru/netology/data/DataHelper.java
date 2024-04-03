@@ -40,25 +40,30 @@ public class DataHelper {
     }
 
     public static String getMonth() {
+
         return LocalDate.now().plusMonths(1).format(DateTimeFormatter.ofPattern("MM"));
     }
 
     public static TestMonth getTestMonth() {
+
         return new TestMonth("1", "!!", "13", "00", "cc");
     }
 
     public static String getYear() {
+
         return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yy"));
     }
 
     public static TestYear getTestYear() {
+
         return new TestYear("1","!!", "23", "cc");
     }
 
     public static Name getName() {
         return new Name(
-                (faker.name().firstName().toUpperCase(Locale.ROOT) + " " + faker.name().lastName().toUpperCase(Locale.ROOT)
-                ));
+                (faker.name().firstName().toUpperCase(Locale.ROOT) + " " + faker.name().lastName().toUpperCase(Locale.ROOT)),
+                faker.name().firstName().toUpperCase(Locale.ROOT))
+                ;
     }
 
     public static TestName getTestName() {
@@ -72,6 +77,7 @@ public class DataHelper {
     }
 
     public static TestCVCCode getTestCVCCode() {
+
         return new TestCVCCode("1", "11", "000", "!!!", "ccc");
     }
 
@@ -146,6 +152,7 @@ public class DataHelper {
     @Value
     public static class Name {
         String firstNameAndLastName;
+        String firstName;
     }
     @Value
     public static class TestName {
