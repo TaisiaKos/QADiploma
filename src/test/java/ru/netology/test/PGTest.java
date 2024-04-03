@@ -33,8 +33,8 @@ public class PGTest {
     }
 
     @Test
-    @DisplayName("Успешная покупка с оплатой по карте, валидные данные")
-    void shouldSuccessfulPaymentGateApprovedCard() {
+    @DisplayName("Successful pay by card")
+    void shouldAllSuccessfulPay() {
         pGate = dashboardPage.selectCard();
         var card = DataHelper.getApprovedCard();
         var month = DataHelper.getMonth();
