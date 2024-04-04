@@ -43,6 +43,24 @@ public class PGate {
         nameOne.setValue(setNameOne.getFirstNameAndLastName());
         code.setValue(setCode.getCode());
     }
+
+    public void monthForm(DataHelper.CardNumber info,
+                         DataHelper.TestMonth setMonth,
+                         String setYear,
+                         DataHelper.Name setNameOne,
+                         DataHelper.CVCCode setCode)
+    {
+        cardNumber.setValue(info.getCardNumber());
+        month.setValue(setMonth.getLessMonth());
+        year.setValue(setYear);
+        nameOne.setValue(setNameOne.getFirstNameAndLastName());
+        code.setValue(setCode.getCode());
+    }
+
+
+
+
+
     public void clickButtonContinue() {
         buttonContinue.click();
     }

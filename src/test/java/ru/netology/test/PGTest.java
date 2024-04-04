@@ -45,10 +45,45 @@ public class PGTest {
         pGate.clickButtonContinue();
         pGate.setApprovedBankMessage();
 
-        var actual = SQLHelper.getPaymentGate();
-        var expected = card.getStatus();
+        var actual = SQLHelper.getPaymentGate().getStatus();
+        var expected = DataHelper.getStatusTransaction().getApproved();
         assertEquals(expected, actual);
     }
 
+    @Test
+    @DisplayName("No successful pay by card - DeclinedCardNumber")
+    void shouldNoSuccessfulPayDeclinedCardNumber() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getDeclinedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromForm(card, month, year, name, cvc);
+        pGate.clickButtonContinue();
+        pGate.setDeclinedBankMessage();
+
+        var actual = SQLHelper.getPaymentGate().getStatus();
+        var expected = DataHelper.getStatusTransaction().getDeclined();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("No successful pay by card - TestMonth")
+    void shouldNoSuccessfulPayTestMonth() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getDeclinedCard();
+        var testMonth = DataHelper.getTestMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.monthForm(card, testMonth, year, name, cvc);
+        pGate.clickButtonContinue();
+        pGate.setDeclinedBankMessage();
+
+        var actual = SQLHelper.getPaymentGate().getStatus();
+        var expected = DataHelper.getStatusTransaction().getDeclined();
+        assertEquals(expected, actual);
+    }
 
 }
