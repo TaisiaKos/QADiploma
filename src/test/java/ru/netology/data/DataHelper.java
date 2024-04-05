@@ -69,7 +69,7 @@ public class DataHelper {
     public static TestName getTestName() {
         return new TestName(
                 (faker.name().firstName().toLowerCase(Locale.ROOT) + " " + faker.name().lastName().toLowerCase(Locale.ROOT)),
-                "иванов иван", "ИВАНОВ ИВАН", "1111 111111", "cccc ccccccc");
+                "иванов иван", "ИВАНОВ ИВАН", "1111 111111", "!!!! !!!!!!");
     }
 
     public static CVCCode getCVCCode() {
@@ -101,7 +101,7 @@ public class DataHelper {
     }
 
     public static MistakesMessage getMistakesMessage() {
-        return new MistakesMessage("Поле обязательно для заполнения", "Неверный формат", "Истёк срок действия карты");
+        return new MistakesMessage("Неверный формат", "Истёк срок действия карты", "Неверно указан срок действия карты");
     }
 
     @Value
@@ -203,9 +203,9 @@ public class DataHelper {
 
     @Value
     public static class MistakesMessage {
-        String fieldMistake;
         String formatMistake;
         String expiredCardMistake;
+        String expirationDateCardMistake;
     }
 
     @Value
@@ -217,6 +217,4 @@ public class DataHelper {
     public static class TransactionId {
         String id;
     }
-
-
 }

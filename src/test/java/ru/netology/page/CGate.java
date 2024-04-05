@@ -12,8 +12,8 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class PGate {
-    private SelenideElement paymentPage = $(byText("Оплата по карте"));
+public class CGate {
+    private SelenideElement creditPage = $(byText("Кредит по данным карты"));
     private static ElementsCollection cardDetails = $$(".input__control");
     private static SelenideElement cardNumber = cardDetails.get(0);
     private static SelenideElement month = cardDetails.get(1);
@@ -24,12 +24,11 @@ public class PGate {
     private static ElementsCollection getBankMessage = $$(".notification__content");
     private static SelenideElement getApprovedBankMessage = getBankMessage.get(0);
     private static SelenideElement getDeclinedBankMessage = getBankMessage.get(1);
-    private static SelenideElement getFieldMistake = $(byText("Поле обязательно для заполнения"));
     private static SelenideElement getFormatMistake = $(byText("Неверный формат"));
     private static SelenideElement getExpiredCardMistake = $(byText("Истёк срок действия карты"));
     private static SelenideElement getExpirationDateCardMistake = $(byText("Неверно указан срок действия карты"));
-    public PGate() {
-        paymentPage
+    public CGate() {
+        creditPage
                 .shouldBe(visible);
     }
     public void fromForm(DataHelper.CardNumber info,
@@ -37,7 +36,7 @@ public class PGate {
                          String setYear,
                          DataHelper.Name setNameOne,
                          DataHelper.CVCCode setCode)
-                         {
+    {
         cardNumber.setValue(info.getCardNumber());
         month.setValue(setMonth);
         year.setValue(setYear);
@@ -58,10 +57,10 @@ public class PGate {
     }
 
     public void formCvcForm(DataHelper.CardNumber info,
-                         String setMonth,
-                         String setYear,
-                         DataHelper.Name setNameOne,
-                         String setCode)
+                            String setMonth,
+                            String setYear,
+                            DataHelper.Name setNameOne,
+                            String setCode)
     {
         cardNumber.setValue(info.getCardNumber());
         month.setValue(setMonth);
@@ -71,10 +70,10 @@ public class PGate {
     }
 
     public void fromNameForm(DataHelper.CardNumber info,
-                         String setMonth,
-                         String setYear,
-                         String setNameOne,
-                         DataHelper.CVCCode setCode)
+                             String setMonth,
+                             String setYear,
+                             String setNameOne,
+                             DataHelper.CVCCode setCode)
     {
         cardNumber.setValue(info.getCardNumber());
         month.setValue(setMonth);
@@ -109,3 +108,4 @@ public class PGate {
                 .shouldBe(Condition.visible);
     }
 }
+

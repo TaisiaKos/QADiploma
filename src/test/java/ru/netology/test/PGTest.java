@@ -15,7 +15,6 @@ import static ru.netology.data.SQLHelper.cleanDatabase;
 public class PGTest {
     DashboardPage dashboardPage;
     PGate pGate;
-    DataHelper dataHelper;
 
     @BeforeAll
     static void setUpAll() {
@@ -34,7 +33,7 @@ public class PGTest {
     }
 
     @Test
-    @DisplayName("Successful pay by card")
+    @DisplayName("Successful pay by card - ApprovedCardNumber")
     void shouldAllSuccessfulPay() {
         pGate = dashboardPage.selectCard();
         var card = DataHelper.getApprovedCard();
@@ -52,7 +51,7 @@ public class PGTest {
     }
 
     @Test
-    @DisplayName("No successful pay by card - DeclinedCardNumber")
+    @DisplayName("No successful pay by card - DeclinedCardNumber!")
     void shouldNoSuccessfulPayDeclinedCardNumber() {
         pGate = dashboardPage.selectCard();
         var card = DataHelper.getDeclinedCard();
@@ -68,8 +67,45 @@ public class PGTest {
         var expected = DataHelper.getStatusTransaction().getDeclined();
         assertEquals(expected, actual);
     }
-
-
+    @Test
+    @DisplayName("No successful pay by card - TestNotEnoughCardNumber")
+    void shouldNoSuccessfulPayTestNotEnoughCardNumber() {
+        pGate = dashboardPage.selectCard();
+        var testCard = DataHelper.getTestCardNumber().getNotEnoughCardNumber();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromCardNumberForm(testCard, month, year, name, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestMarksCardNumber")
+    void shouldNoSuccessfulPayTestMarksCardNumber() {
+        pGate = dashboardPage.selectCard();
+        var testCard = DataHelper.getTestCardNumber().getMarksCardNumber();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromCardNumberForm(testCard, month, year, name, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestTextCardNumber")
+    void shouldNoSuccessfulPayTestTextCardNumber() {
+        pGate = dashboardPage.selectCard();
+        var testCard = DataHelper.getTestCardNumber().getTextCardNumber();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromCardNumberForm(testCard, month, year, name, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
 
     @Test
     @DisplayName("No successful pay by card - TestOneMonth")
@@ -110,10 +146,10 @@ public class PGTest {
         var cvc = DataHelper.getCVCCode();
         pGate.fromForm(card, testMonth, year, name, cvc);
         pGate.clickButtonContinue();
-        pGate.setFormatMistake();
+        pGate.setExpirationDateCardMistake();
     }
     @Test
-    @DisplayName("No successful pay by card - TestLessMonth")
+    @DisplayName("No successful pay by card - TestLessMonth!")
     void shouldNoSuccessfulPayTestLessMonth() {
         pGate = dashboardPage.selectCard();
         var card = DataHelper.getApprovedCard();
@@ -177,7 +213,7 @@ public class PGTest {
         var cvc = DataHelper.getCVCCode();
         pGate.fromForm(card, month, testYear, name, cvc);
         pGate.clickButtonContinue();
-        pGate.setFormatMistake();
+        pGate.setExpiredCardMistake();
     }
     @Test
     @DisplayName("No successful pay by card - TestSymbolYear")
@@ -191,5 +227,154 @@ public class PGTest {
         pGate.fromForm(card, month, testYear, name, cvc);
         pGate.clickButtonContinue();
         pGate.setFormatMistake();
+    }
+
+    @Test
+    @DisplayName("No successful pay by card - TestLettersName!")
+    void shouldNoSuccessfulPayTestLettersName() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var testName = DataHelper.getTestName().getLettersName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromNameForm(card, month, year, testName, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestSmallName!")
+    void shouldNoSuccessfulPayTestSmallName() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var testName = DataHelper.getTestName().getSmallName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromNameForm(card, month, year, testName, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+
+    @Test
+    @DisplayName("No successful pay by card - TestBigName!")
+    void shouldNoSuccessfulPayTestBigName() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var testName = DataHelper.getTestName().getBigName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromNameForm(card, month, year, testName, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestNumberName!")
+    void shouldNoSuccessfulPayTestNumberName() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var testName = DataHelper.getTestName().getNumberName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromNameForm(card, month, year, testName, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestSymbolsName!")
+    void shouldNoSuccessfulPayTestSymbolsName() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var testName = DataHelper.getTestName().getSymbolsName();
+        var cvc = DataHelper.getCVCCode();
+        pGate.fromNameForm(card, month, year, testName, cvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestOneCVCCode")
+    void shouldNoSuccessfulPayTestOneCVCCode() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getTestCVCCode().getOneCode();
+        pGate.formCvcForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestTwoCVCCode")
+    void shouldNoSuccessfulPayTestTwoCVCCode() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getTestCVCCode().getTwoCode();
+        pGate.formCvcForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestZeroCVCCode!")
+    void shouldNoSuccessfulPayTestZeroCVCCode() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getTestCVCCode().getZeroCode();
+        pGate.formCvcForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestMarksCVCCode")
+    void shouldNoSuccessfulPayTestMarksCVCCode() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getTestCVCCode().getMarksCode();
+        pGate.formCvcForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("No successful pay by card - TestSymbolCVCCode")
+    void shouldNoSuccessfulPayTestSymbolCVCCode() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getTestCVCCode().getSymbolCode();
+        pGate.formCvcForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setFormatMistake();
+    }
+    @Test
+    @DisplayName("Successful transaction pay by card - 200")
+    void shouldNoSuccessfulTransactionPay200() {
+        pGate = dashboardPage.selectCard();
+        var card = DataHelper.getApprovedCard();
+        var month = DataHelper.getMonth();
+        var year = DataHelper.getYear();
+        var name = DataHelper.getName();
+        var testCvc = DataHelper.getCVCCode();
+        pGate.fromForm(card, month, year, name, testCvc);
+        pGate.clickButtonContinue();
+        pGate.setApprovedBankMessage();
+
+        var actual = DataHelper.getToll();
+        var expected = DataHelper.getToll();
+        assertEquals(expected, actual);
     }
 }

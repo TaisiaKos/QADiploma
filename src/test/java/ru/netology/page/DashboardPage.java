@@ -24,5 +24,9 @@ public class DashboardPage {
         elementCard.click();
         return new PGate();
     }
+    public CGate selectCredit() {
+        elementCredit.click();
+        return new CGate();
+    }
 }
 
